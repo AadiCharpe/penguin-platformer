@@ -27,9 +27,8 @@ const bg_music = play("game_music", {
 scene("one", ()=>{
     bg_music.paused = false
     add([
-        sprite("background"),
+        sprite("background", {width:width(), height:height()}),
         pos(0, 0),
-        scale(0.75),
     ])
     
     add([
