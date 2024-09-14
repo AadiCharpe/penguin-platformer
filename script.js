@@ -8,14 +8,14 @@ setGravity(2400)
 
 // load a default sprite
 //loadBean()
-loadSprite("player", "penguin-png-images-5a22412a142e52.5027763715121943460827-removebg-preview.png")
-loadSprite("coin", "pngtree-gold-coin-coin-money-e-commerce-gold-coin-image_1138140-removebg-preview.png")
-loadSprite("background", "background2.png")
+loadSprite("player", "./penguin-png-images-5a22412a142e52.5027763715121943460827-removebg-preview.png")
+loadSprite("coin", "./pngtree-gold-coin-coin-money-e-commerce-gold-coin-image_1138140-removebg-preview.png")
+loadSprite("background", "./background2.png")
 
-loadSound("coin_sound", "/sfx/coin.mp3")
-loadSound("death_sound", "/sfx/death.mp3")
-loadSound("jump_sound", "/sfx/jump.mp3")
-loadSound("game_music", "/sfx/music.mp3")
+loadSound("coin_sound", "./sfx/coin.mp3")
+loadSound("death_sound", "./sfx/death.mp3")
+loadSound("jump_sound", "./sfx/jump.mp3")
+loadSound("game_music", "./sfx/music.mp3")
 
 let score = 0
 
