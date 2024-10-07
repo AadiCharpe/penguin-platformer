@@ -105,7 +105,21 @@ scene("one", ()=>{
         if(player.pos.x > 10)
             player.move(-350,0);
     })
-
+    onMouseDown(()=>{
+        if(mousePos().y < height() / 2) {
+            if(player.isGrounded()) {
+                player.jump(900);
+                play("jump_sound");
+            }
+        } else {
+            if(mousePos().x > width() / 2)
+                player.move(350,0);
+            else {
+                if(player.pos.x > 10)
+                    player.move(-350,0);
+            }
+        }
+    })
     player.onCollide("coin", ()=>{
         score++;
         play("coin_sound");
