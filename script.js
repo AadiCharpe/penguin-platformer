@@ -52,6 +52,8 @@ scene("one", ()=>{
     let h;
     let prev = height() - 200;
     let prev2;
+    let right = 0;
+    let left = 0;
     // random platform generator
     for(let i = 300; i < width(); i += Math.floor(Math.random() * 300) + 75) {
         h = Math.floor(Math.random() * 7) % 2 == 1 ? prev + (Math.floor(Math.random() * 125)) : prev - (Math.floor(Math.random() * 75) + 35);
@@ -96,15 +98,67 @@ scene("one", ()=>{
             play("jump_sound");
         }
     })
+
+    onKeyPress("space", () => {
+        // .jump() is provided by the body() component
+        if(player.isGrounded()) {
+            player.jump(900);
+            play("jump_sound");
+        }
+    })
+
+    onKeyPress("w", () => {
+        // .jump() is provided by the body() component
+        if(player.isGrounded()) {
+            player.jump(900);
+            play("jump_sound");
+        }
+    })
     
     onKeyDown("right", () => {
-        player.move(350,0);
+        if(right < 2) {
+            player.move(350,0);
+            right = 1;
+        }
+    })
+
+    onKeyDown("d", () => {
+        if(right == 0 || right == 2) {
+            player.move(350,0);
+            right = 2;
+        }
     })
     
-    onKeyDown("left", () => {
-        if(player.pos.x > 10)
-            player.move(-350,0);
+    onKeyRelease("right", ()=>{
+        right = 0;
     })
+
+    onKeyRelease("d", ()=>{
+        right = 0;
+    })
+
+    onKeyDown("left", () => {
+        if(player.pos.x > 10 && left < 2) {
+            player.move(-350,0);
+            left = 1;
+        }
+    })
+
+    onKeyDown("a", () => {
+        if(player.pos.x > 10 && (left == 0 || left == 2)) {
+            player.move(-350,0);
+            left = 2;
+        }
+    })
+
+    onKeyRelease("left", ()=>{
+        left = 0;
+    })
+
+    onKeyRelease("a", ()=>{
+        left = 0;
+    })
+
     onMouseDown(()=>{
         if(mousePos().y < height() / 2) {
             if(player.isGrounded()) {
@@ -112,14 +166,24 @@ scene("one", ()=>{
                 play("jump_sound");
             }
         } else {
-            if(mousePos().x > width() / 2)
+            if(mousePos().x > width() / 2 && (right == 0 || right == 3)) {
                 player.move(350,0);
+                right = 3;
+            }
             else {
-                if(player.pos.x > 10)
+                if(player.pos.x > 10 && (left == 0 || left == 3)) {
                     player.move(-350,0);
+                    left = 3;
+                }
             }
         }
     })
+
+    onMouseRelease(()=>{
+        right = 0;
+        left = 0;
+    })
+
     player.onCollide("coin", ()=>{
         score++;
         play("coin_sound");
